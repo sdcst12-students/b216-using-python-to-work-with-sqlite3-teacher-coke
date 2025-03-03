@@ -21,3 +21,41 @@ Casey           cat             Siberian        8    m          true            
 Friend          cat             Domestic        4    m          false               102
 Copper          dog             Beagle          12   m          true                104
 """
+
+import sqlite3
+
+file = 'dbase.db'
+connection = sqlite3.connect(file)
+print(connection)
+
+cursor = connection.cursor()
+query ="""
+CREATE TABLE if not exists vet_pets (
+    id integer primary key autoincrement,
+    name tinytext,
+    species tinytext,
+    breed tinytext,
+    age int,
+    gender char(1),
+    spayed_neutered boolean,
+    owner_id int);
+"""
+cursor.execute(query)
+connection.commit()
+
+vet_pets = [
+    ("Fluffy", "dog", "Pomeranian", 5, "m", True, 101),
+    ("Benjamin", "cat", "Siberian", 8, "m", True, 103),
+    ("Casey", "cat", "Siberian", 8, "m", True, 103),
+    ("Friend", "cat", "Domestic", 4, "m", False, 102),
+    ("Copper", "dog", "Beagle", 12, "m", True, 104)
+]
+
+for pet in vet_pets:
+    query = f"""
+    INSERT INTO vet_pets (name, species, breed, age, gender, spayed_neutered, owner_id)
+    VALUES ('{pet[0]}', '{pet[1]}', '{pet[2]}', {pet[3]}, '{pet[4]}', {pet[5]}, {pet[6]});
+    """
+    cursor.execute(query)
+
+connection.commit()
