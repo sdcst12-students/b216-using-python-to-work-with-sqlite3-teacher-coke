@@ -24,8 +24,8 @@ Copper          dog             Beagle          12   m          true            
 
 import sqlite3
 
-file = 'dbase.db'
-connection = sqlite3.connect(file)
+dbase = 'dbase.db'
+connection = sqlite3.connect(dbase)
 print(connection)
 
 cursor = connection.cursor()

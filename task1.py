@@ -22,8 +22,8 @@ Jen Mezei       jen@shaw.ca     6042231134      104     891 Cullen Cresc        
 
 import sqlite3
 
-file = 'dbase.db'
-connection = sqlite3.connect(file)
+dbase = 'dbase.db'
+connection = sqlite3.connect(dbase)
 print(connection)
 
 cursor = connection.cursor()
